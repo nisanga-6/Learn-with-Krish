@@ -1,0 +1,42 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from SumNumService WSDL service -->
+
+  <service name="SumNum" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://soapweb"/>
+      <parameter name="wsdlServiceElement" value="SumNumService"/>
+      <parameter name="schemaQualified" value="http://soapweb"/>
+      <parameter name="wsdlServicePort" value="SumNum"/>
+      <parameter name="className" value="soapweb.SumNumSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="SumNum"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="sum" qname="operNS:sum" xmlns:operNS="http://soapweb" returnQName="retNS:sumReturn" xmlns:retNS="http://soapweb" returnType="rtns:int" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:a" xmlns:pns="http://soapweb" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:b" xmlns:pns="http://soapweb" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="sub" qname="operNS:sub" xmlns:operNS="http://soapweb" returnQName="retNS:subReturn" xmlns:retNS="http://soapweb" returnType="rtns:int" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:a" xmlns:pns="http://soapweb" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:b" xmlns:pns="http://soapweb" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="mul" qname="operNS:mul" xmlns:operNS="http://soapweb" returnQName="retNS:mulReturn" xmlns:retNS="http://soapweb" returnType="rtns:int" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:a" xmlns:pns="http://soapweb" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:b" xmlns:pns="http://soapweb" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="devide" qname="operNS:devide" xmlns:operNS="http://soapweb" returnQName="retNS:devideReturn" xmlns:retNS="http://soapweb" returnType="rtns:int" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:a" xmlns:pns="http://soapweb" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:b" xmlns:pns="http://soapweb" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <parameter name="allowedMethods" value="sub mul sum devide"/>
+
+  </service>
+</deployment>
